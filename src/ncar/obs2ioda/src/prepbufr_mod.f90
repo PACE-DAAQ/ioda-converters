@@ -495,7 +495,7 @@ subroutine read_prepbufr(filename, filedate)
 
       plink % nlevels = 0 ! initialize
 
-      write(*,*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  nlevels: ", nlevels
+!     write(*,*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  nlevels: ", nlevels
       loop_nlevels: do k = 1, nlevels
 
          ! pressure and height quality markers do not carry over to ioda
@@ -580,14 +580,15 @@ subroutine read_prepbufr(filename, filedate)
          if (obs(2,k) > 0.0 .and. obs(2,k) < r8bfms) then
             obs(2,k) = obs(2,k)*1e-6  ! mg/kg to kg/kg
             if (obs(3,k) > -200.0 .and. obs(3,k) < 350.0) then
-               if ( do_tv_to_ts .and. tpc == 8 ) then   ! program code 008 VIRTMP
-                  ! 0.61 is used in NCEP prepdata.f to convert T to Tv
-                  obs(3,k) = obs(3,k) / (1.0 + 0.61 * obs(2,k))
-               end if
+! debug        if ( do_tv_to_ts .and. tpc == 8 ) then   ! program code 008 VIRTMP
+! debug           ! 0.61 is used in NCEP prepdata.f to convert T to Tv
+! debug           obs(3,k) = obs(3,k) / (1.0 + 0.61 * obs(2,k))
+! debug        end if
             end if
          end if
 
-         if ( do_tv_to_ts .or. tpc /= 8 ) then   ! program code 008 VIRTMP
+! debug  if ( do_tv_to_ts .or. tpc /= 8 ) then   ! program code 008 VIRTMP
+         if ( .true. ) then
             ! sensible temperature
             if ( obs(3,k) < r8bfms ) then
                plink % each % t % val = obs(3,k)
@@ -598,7 +599,9 @@ subroutine read_prepbufr(filename, filedate)
                   plink % each % t % err = oes(3,k)
                end if
             end if
-         else
+! debug  else
+         end if
+         if ( .false. ) then
             ! virtual temperature
             if ( obs(3,k) < r8bfms ) then
                plink % each % tv % val = obs(3,k)
