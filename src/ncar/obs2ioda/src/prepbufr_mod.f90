@@ -506,10 +506,10 @@ subroutine read_prepbufr(filename, filedate)
          !       or a non-pressure observation failed a limit check
          ! qm=15: Observation is flagged for non-use by analysis
          if ( qms(1,k) < r8bfms ) then ! pressure
-            if ( nint(qms(1,k)) == 8 .or. nint(qms(1,k)) == 15 ) cycle loop_nlevels
+!           if ( nint(qms(1,k)) == 8 .or. nint(qms(1,k)) == 15 ) cycle loop_nlevels
          end if
          if ( qms(4,k) < r8bfms ) then ! height
-            if ( nint(qms(4,k)) == 8 .or. nint(qms(4,k)) == 15 ) cycle loop_nlevels
+!           if ( nint(qms(4,k)) == 8 .or. nint(qms(4,k)) == 15 ) cycle loop_nlevels
          end if
 
          plink % nlevels = plink % nlevels + 1
