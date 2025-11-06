@@ -580,7 +580,6 @@ subroutine read_prepbufr(filename, filedate)
          if (obs(2,k) > 0.0 .and. obs(2,k) < r8bfms) then
             obs(2,k) = obs(2,k)*1e-6  ! mg/kg to kg/kg
             if (obs(3,k) > -200.0 .and. obs(3,k) < 350.0) then
-               write(*,*) "  .... compute t from tv"
 ! debug        if ( do_tv_to_ts .and. tpc == 8 ) then   ! program code 008 VIRTMP
 ! debug           ! 0.61 is used in NCEP prepdata.f to convert T to Tv
 ! debug           obs(3,k) = obs(3,k) / (1.0 + 0.61 * obs(2,k))
