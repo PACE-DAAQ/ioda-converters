@@ -97,15 +97,16 @@ subroutine read_prepbufr(filename, filedate)
    logical           :: match, end_of_file, drift
    character(len=8)  :: subset, subst2, csid, csid2
    character(len=40) :: obstr,hdstr,qmstr,oestr, pcstr, drstr
+   integer(i_kind), parameter   :: maxlvl=2550
    real(r_double)    :: r8sid, r8sid2
    real(r_double)    :: hdr(7), hdr2(7), hdr_save(7)
-   real(r_double)    :: obs(8,255),qms(8,255),oes(8,255),pco(8,255)
-   real(r_double)    :: obs2(8,255),qms2(8,255),oes2(8,255),pco2(8,255)
+   real(r_double)    :: obs(8,maxlvl),qms(8,maxlvl),oes(8,maxlvl),pco(8,maxlvl)
+   real(r_double)    :: obs2(8,maxlvl),qms2(8,maxlvl),oes2(8,maxlvl),pco2(8,maxlvl)
    real(r_double)    :: pmo(2,1), pmo2(2,1), pmo_save(2,1)
-   real(r_double)    :: temp(8,255)
-   real(r_double)    :: obs_save(8,255)
+   real(r_double)    :: temp(8,maxlvl)
+   real(r_double)    :: obs_save(8,maxlvl)
    real(r_double)    :: pob, pob1, pob2
-   real(r_double)    :: drf(8,255), drf2(8,255) ! for balloon drift
+   real(r_double)    :: drf(8,maxlvl), drf2(8,maxlvl) ! for balloon drift
    real(r_double)    :: satqc(1), satid(1)
    equivalence (r8sid, csid), (r8sid2, csid2)
 
@@ -215,10 +216,10 @@ subroutine read_prepbufr(filename, filedate)
       call ufbint(iunit,satid,1,1,iret,'SAID')
       call ufbint(iunit,hdr,7,1,iret,hdstr)
       call ufbint(iunit,pmo,2,1,iret,'PMO PMQ')
-      call ufbint(iunit,qms,8,255,nlevels,qmstr)
-      call ufbint(iunit,oes,8,255,nlevels,oestr)
-      call ufbint(iunit,pco,8,255,nlevels,pcstr)
-      call ufbint(iunit,obs,8,255,nlevels,obstr)
+      call ufbint(iunit,qms,8,maxlvl,nlevels,qmstr)
+      call ufbint(iunit,oes,8,maxlvl,nlevels,oestr)
+      call ufbint(iunit,pco,8,maxlvl,nlevels,pcstr)
+      call ufbint(iunit,obs,8,maxlvl,nlevels,obstr)
 
       r8sid = hdr(1)
       t29 = missing_i
@@ -245,7 +246,7 @@ subroutine read_prepbufr(filename, filedate)
       end if
 
       drift = kx==120.or.kx==220.or.kx==221
-      if ( drift ) call ufbint(iunit,drf,8,255,iret,drstr)
+      if ( drift ) call ufbint(iunit,drf,8,maxlvl,iret,drstr)
 
       call readns(iunit,subst2,idate2,iret)
 
@@ -278,11 +279,11 @@ subroutine read_prepbufr(filename, filedate)
             end if
             !The two headers match, now read data from the second subset
             call ufbint(iunit,pmo2,2,1,nlevels2,'PMO PMQ')
-            call ufbint(iunit,qms2,8,255,nlevels2,qmstr)
-            call ufbint(iunit,oes2,8,255,nlevels2,oestr)
-            call ufbint(iunit,pco2,8,255,nlevels2,pcstr)
-            call ufbint(iunit,obs2,8,255,nlevels2,obstr)
-            if ( drift ) call ufbint(iunit,drf2,8,255,iret,drstr)
+            call ufbint(iunit,qms2,8,maxlvl,nlevels2,qmstr)
+            call ufbint(iunit,oes2,8,maxlvl,nlevels2,oestr)
+            call ufbint(iunit,pco2,8,maxlvl,nlevels2,pcstr)
+            call ufbint(iunit,obs2,8,maxlvl,nlevels2,obstr)
+            if ( drift ) call ufbint(iunit,drf2,8,maxlvl,iret,drstr)
 
             if ( use_errtable ) then
                kx = nint(hdr2(5))
