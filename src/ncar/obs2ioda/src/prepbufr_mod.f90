@@ -129,10 +129,10 @@ subroutine read_prepbufr(filename, filedate)
 !  real(r_kind) :: target_lat_max = 41.0_r_kind
 !  real(r_kind) :: target_lon_min = 254.0_r_kind
 !  real(r_kind) :: target_lon_max = 256.0_r_kind
-   real(r_kind) :: target_lat_min = 39.65_r_kind
-   real(r_kind) :: target_lat_max = 39.85_r_kind
-   real(r_kind) :: target_lon_min = 255.02_r_kind
-   real(r_kind) :: target_lon_max = 255.22_r_kind
+   real(r_kind) :: target_lat_min = 39.27_r_kind
+   real(r_kind) :: target_lat_max = 40.27_r_kind
+   real(r_kind) :: target_lon_min = 254.62_r_kind
+   real(r_kind) :: target_lon_max = 255.62_r_kind
 
    write(*,*) '--- reading '//trim(filename)//' ---'
    hdstr='SID XOB YOB DHR TYP ELV T29'
