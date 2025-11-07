@@ -495,7 +495,9 @@ subroutine read_prepbufr(filename, filedate)
 
       plink % nlevels = 0 ! initialize
 
-!     write(*,*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  nlevels: ", nlevels
+      if ( kx == 119 ) then
+        write(*,*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  nlevels: ", nlevels
+      end if
       loop_nlevels: do k = 1, nlevels
 
          ! pressure and height quality markers do not carry over to ioda
