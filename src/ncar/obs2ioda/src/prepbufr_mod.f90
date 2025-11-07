@@ -576,6 +576,14 @@ subroutine read_prepbufr(filename, filedate)
             if ( pco(3,k) < r8bfms ) tpc = nint(pco(3,k))
          end if
 
+         ! Check for the High-Resolution Temperature/Mass report type (119) RPTYPE_OF_LEVEL
+         if ( kx .eq. 119 ) then
+            ! Map Temperature
+            if ( obs(3,k) < r8bfms ) then
+               plink % each % t % val = obs(3,k)
+            end if
+         end if
+
          ! scale q and compute t from tv, if they aren't missing
          if (obs(2,k) > 0.0 .and. obs(2,k) < r8bfms) then
             obs(2,k) = obs(2,k)*1e-6  ! mg/kg to kg/kg
