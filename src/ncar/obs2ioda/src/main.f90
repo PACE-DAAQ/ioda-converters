@@ -135,8 +135,8 @@ do ifile = 1, nfile
          call read_prepbufr(trim(inpdir)//trim(filename), filedate)
 
          if ( apply_gsi_qc ) then
-!           write(*,*) '--- applying some additional QC as in GSI read_prepbufr.f90 for the global model ---'
-!           call filter_obs_conv
+            write(*,*) '--- applying some additional QC as in GSI read_prepbufr.f90 for the global model ---'
+            call filter_obs_conv
          end if
 
          ! transfer info from linked list to arrays grouped by obs/variable types

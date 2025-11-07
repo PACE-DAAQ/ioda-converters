@@ -506,7 +506,7 @@ subroutine read_prepbufr(filename, filedate)
         ( hdr(2) >= target_lon_min ) .AND. ( hdr(2) <= target_lon_max ) ) then
 !       write(*,*) "DEBUG: T29:", T29, " RPTYPE (kx):", kx, " Lat:", hdr(3), " Lon:", hdr(2), " NLevels:", nlevels
         if ( kx == 187 ) then
-          write('(a,f9.2,a,f9.2,a,f11.2,a,f9.2)',*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  p: ", obs(1,1), " t: ",  obs(3,1)
+          write(*,'(a,f9.2,a,f9.2,a,f11.2,a,f9.2)') " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  p: ", obs(1,1), " t: ",  obs(3,1)
         end if
       end if
       loop_nlevels: do k = 1, nlevels
