@@ -723,9 +723,9 @@ subroutine sort_obs_conv(filedate, nfgat)
          nrecs(plink%obtype_idx,plink%ifgat) = nrecs(plink%obtype_idx,plink%ifgat) + 1
          nlocs(plink%obtype_idx,plink%ifgat) = nlocs(plink%obtype_idx,plink%ifgat) + plink%nlevels
       else
-         ! found undefined t29=534/kx=180,280 in file
-         write(*,*) 't29 = ', plink%t29
-         write(*,*) 'kx  = ', plink%rptype
+!        ! found undefined t29=534/kx=180,280 in file
+!        write(*,*) 't29 = ', plink%t29
+!        write(*,*) 'kx  = ', plink%rptype
       end if
 
       plink => plink%next
