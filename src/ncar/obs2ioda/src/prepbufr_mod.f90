@@ -506,10 +506,10 @@ subroutine read_prepbufr(filename, filedate)
          !       or a non-pressure observation failed a limit check
          ! qm=15: Observation is flagged for non-use by analysis
          if ( qms(1,k) < r8bfms ) then ! pressure
-!           if ( nint(qms(1,k)) == 8 .or. nint(qms(1,k)) == 15 ) cycle loop_nlevels
+            if ( nint(qms(1,k)) == 8 .or. nint(qms(1,k)) == 15 ) cycle loop_nlevels
          end if
          if ( qms(4,k) < r8bfms ) then ! height
-!           if ( nint(qms(4,k)) == 8 .or. nint(qms(4,k)) == 15 ) cycle loop_nlevels
+            if ( nint(qms(4,k)) == 8 .or. nint(qms(4,k)) == 15 ) cycle loop_nlevels
          end if
 
          plink % nlevels = plink % nlevels + 1
@@ -722,10 +722,10 @@ subroutine sort_obs_conv(filedate, nfgat)
          ! obtype assigned, advance ob counts
          nrecs(plink%obtype_idx,plink%ifgat) = nrecs(plink%obtype_idx,plink%ifgat) + 1
          nlocs(plink%obtype_idx,plink%ifgat) = nlocs(plink%obtype_idx,plink%ifgat) + plink%nlevels
-      !else
-         !found undefined t29=534/kx=180,280 in file
-         !write(*,*) 't29 = ', plink%t29
-         !write(*,*) 'kx  = ', plink%rptype
+      else
+         ! found undefined t29=534/kx=180,280 in file
+         write(*,*) 't29 = ', plink%t29
+         write(*,*) 'kx  = ', plink%rptype
       end if
 
       plink => plink%next
