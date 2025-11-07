@@ -505,9 +505,10 @@ subroutine read_prepbufr(filename, filedate)
       if ( ( hdr(3) >= target_lat_min ) .AND. ( hdr(3) <= target_lat_max ) .AND. &
         ( hdr(2) >= target_lon_min ) .AND. ( hdr(2) <= target_lon_max ) ) then
         if ( T29 >= 500 .and. drift ) then
-!       if ( (kx == 510) .or. (T29 .eq. 510) ) then
-          write(*,*) "DEBUG: T29:", T29, " RPTYPE (kx):", kx, " Lat:", hdr(3), " Lon:", hdr(2), " NLevels:", nlevels, " drift: ", drift
-          write(*,'(a,f9.2,a,f9.2,a,f11.2,a,f9.2)') " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  p: ", obs(1,1), " t: ",  obs(3,1)
+!         write(*,*) "DEBUG: T29:", T29, " RPTYPE (kx):", kx, " Lat:", hdr(3), " Lon:", hdr(2), " NLevels:", nlevels, " drift: ", drift
+          write(*,'(2(a,i6), 5(a,f9.2), a, l1)') &
+             "DEBUG: T29:", T29, " RPTYPE (kx):", kx, " Lat: ", hdr(3), " Lon: ", hdr(2), &
+             " p: ", obs(1,1), " t: ", obs(3,1), " u: ", obs(5,1), " drift:", drift
         end if
       end if
       loop_nlevels: do k = 1, nlevels
