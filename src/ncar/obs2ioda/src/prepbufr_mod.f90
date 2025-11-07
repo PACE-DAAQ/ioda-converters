@@ -124,6 +124,12 @@ subroutine read_prepbufr(filename, filedate)
    real(r_kind)      :: coef
    real(r_kind)      :: qs, tval
 
+   ! Define a bounding box for Denver/Boulder (close to 40N, 105W)
+   real(r_kind) :: target_lat_min = 39.0_r_kind
+   real(r_kind) :: target_lat_max = 41.0_r_kind
+   real(r_kind) :: target_lon_min = -106.0_r_kind ! West of Prime Meridian
+   real(r_kind) :: target_lon_max = -104.0_r_kind
+
    write(*,*) '--- reading '//trim(filename)//' ---'
    hdstr='SID XOB YOB DHR TYP ELV T29'
    obstr='POB QOB TOB ZOB UOB VOB PWO CAT' ! observation
@@ -495,8 +501,12 @@ subroutine read_prepbufr(filename, filedate)
 
       plink % nlevels = 0 ! initialize
 
-      if ( kx == 119 ) then
-        write(*,*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  nlevels: ", nlevels
+      if ( ( hdr(3) >= target_lat_min ) .AND. ( hdr(3) <= target_lat_max ) .AND. &
+        ( hdr(2) >= target_lon_min ) .AND. ( hdr(2) <= target_lon_max ) ) then
+        write(*,*) "DEBUG: T29:", T29, " RPTYPE (kx):", kx, " Lat:", hdr(3), " Lon:", hdr(2), " NLevels:", nlevels
+        if ( kx == 119 ) then
+          write(*,*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  nlevels: ", nlevels
+        end if
       end if
       loop_nlevels: do k = 1, nlevels
 
