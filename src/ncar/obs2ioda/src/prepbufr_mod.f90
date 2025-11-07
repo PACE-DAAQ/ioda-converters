@@ -251,7 +251,8 @@ subroutine read_prepbufr(filename, filedate)
          end do
       end if
 
-      drift = kx==120.or.kx==220.or.kx==221
+! dbg drift = kx==120.or.kx==220.or.kx==221
+      drift = kx==120.or.kx==220.or.kx==221.or.kx==187
       if ( drift ) call ufbint(iunit,drf,8,maxlvl,iret,drstr)
 
       call readns(iunit,subst2,idate2,iret)
@@ -504,8 +505,8 @@ subroutine read_prepbufr(filename, filedate)
       if ( ( hdr(3) >= target_lat_min ) .AND. ( hdr(3) <= target_lat_max ) .AND. &
         ( hdr(2) >= target_lon_min ) .AND. ( hdr(2) <= target_lon_max ) ) then
         write(*,*) "DEBUG: T29:", T29, " RPTYPE (kx):", kx, " Lat:", hdr(3), " Lon:", hdr(2), " NLevels:", nlevels
-        if ( kx == 119 ) then
-          write(*,*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  nlevels: ", nlevels
+        if ( kx == 187 ) then
+          write(*,*) " DEBUG: lat: ", hdr(3), "  lon: ", hdr(2), "  nlevels: ", nlevels,  " t: ",  obs(3,1)
         end if
       end if
       loop_nlevels: do k = 1, nlevels
@@ -589,7 +590,7 @@ subroutine read_prepbufr(filename, filedate)
          end if
 
          ! Check for the High-Resolution Temperature/Mass report type (119) RPTYPE_OF_LEVEL
-         if ( kx .eq. 119 ) then
+         if ( kx .eq. 187 ) then
             ! Map Temperature
             if ( obs(3,k) < r8bfms ) then
                plink % each % t % val = obs(3,k)
