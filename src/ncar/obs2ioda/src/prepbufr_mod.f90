@@ -127,10 +127,8 @@ subroutine read_prepbufr(filename, filedate)
    ! Define a bounding box for Denver/Boulder (close to 40N, 105W)
    real(r_kind) :: target_lat_min = 39.0_r_kind
    real(r_kind) :: target_lat_max = 41.0_r_kind
-!  real(r_kind) :: target_lon_min = -106.0_r_kind ! West of Prime Meridian
-!  real(r_kind) :: target_lon_max = -104.0_r_kind
-   real(r_kind) :: target_lon_min = -180.0_r_kind ! West of Prime Meridian
-   real(r_kind) :: target_lon_max =  360.0_r_kind
+   real(r_kind) :: target_lon_min = 254.0_r_kind
+   real(r_kind) :: target_lon_max = 256.0_r_kind
 
    write(*,*) '--- reading '//trim(filename)//' ---'
    hdstr='SID XOB YOB DHR TYP ELV T29'
