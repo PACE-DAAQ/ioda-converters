@@ -1047,7 +1047,6 @@ subroutine filter_obs_conv
               plink%rptype == 132 .or. &
               plink%rptype == 133 .or. &
               plink%rptype == 180 .or. &
-              plink%rptype == 187 .or. &
               plink%rptype == 182 ) then
             if ( plink % each % t  % qm < lim_qm ) iuse_t  = itrue
             if ( plink % each % tv % qm < lim_qm ) iuse_tv = itrue
@@ -1064,7 +1063,6 @@ subroutine filter_obs_conv
               plink%rptype == 233 .or. &
               plink%rptype == 280 .or. &
               plink%rptype == 282 .or. &
-              plink%rptype == 287 .or. &
               plink%rptype == 289 .or. &
               plink%rptype == 290 ) then
             if ( plink % each % u % qm < lim_qm .and. plink % each % v % qm < lim_qm ) iuse_uv = itrue
