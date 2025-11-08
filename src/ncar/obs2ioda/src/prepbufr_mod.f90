@@ -256,7 +256,7 @@ subroutine read_prepbufr(filename, filedate)
       end if
 
 ! dbg drift = kx==120.or.kx==220.or.kx==221
-      drift = kx==120.or.kx==220.or.kx==221.or.kx==187
+      drift = kx==120.or.kx==220.or.kx==221.or.kx==131
       if ( drift ) call ufbint(iunit,drf,8,maxlvl,iret,drstr)
 
       call readns(iunit,subst2,idate2,iret)
@@ -596,13 +596,13 @@ subroutine read_prepbufr(filename, filedate)
             if ( pco(3,k) < r8bfms ) tpc = nint(pco(3,k))
          end if
 
-         ! Check for the High-Resolution Temperature/Mass report type (119) RPTYPE_OF_LEVEL
-         if ( kx .eq. 187 ) then
-            ! Map Temperature
-            if ( obs(3,k) < r8bfms ) then
-               plink % each % t % val = obs(3,k)
-            end if
-         end if
+! debug  ! Check for the High-Resolution Temperature/Mass report type (119) RPTYPE_OF_LEVEL
+! debug  if ( kx .eq. 131 ) then
+! debug     ! Map Temperature
+! debug     if ( obs(3,k) < r8bfms ) then
+! debug        plink % each % t % val = obs(3,k)
+! debug     end if
+! debug  end if
 
          ! scale q and compute t from tv, if they aren't missing
          if (obs(2,k) > 0.0 .and. obs(2,k) < r8bfms) then
