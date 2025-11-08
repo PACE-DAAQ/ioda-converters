@@ -509,7 +509,7 @@ subroutine read_prepbufr(filename, filedate)
       if ( ( hdr(3) >= target_lat_min ) .AND. ( hdr(3) <= target_lat_max ) .AND. &
         ( hdr(2) >= target_lon_min ) .AND. ( hdr(2) <= target_lon_max ) ) then
 !       if ( T29 >= 500 .and. drift ) then
-        if ( T29 < 500 ) then
+        if ( T29 < 500 and obs(1,1) < 300.0 ) then
 !         write(*,*) "DEBUG: T29:", T29, " RPTYPE (kx):", kx, " Lat:", hdr(3), " Lon:", hdr(2), " NLevels:", nlevels, " drift: ", drift
           write(*,'(a, a5, 1x, 2(a,i6,1x), 5(a,f9.2,1x), a, l1)') &
              "DEBUG: StationID: ", csid(1:5), "T29:", T29, "RPTYPE (kx):", kx, "Lat:", hdr(3), "Lon:", hdr(2), &
