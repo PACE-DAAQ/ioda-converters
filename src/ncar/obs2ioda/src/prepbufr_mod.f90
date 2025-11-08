@@ -97,7 +97,7 @@ subroutine read_prepbufr(filename, filedate)
    logical           :: match, end_of_file, drift
    character(len=8)  :: subset, subst2, csid, csid2
    character(len=40) :: obstr,hdstr,qmstr,oestr, pcstr, drstr
-   integer(i_kind), parameter   :: maxlvl=20000
+   integer(i_kind), parameter   :: maxlvl=255
    real(r_double)    :: r8sid, r8sid2
    real(r_double)    :: hdr(7), hdr2(7), hdr_save(7)
    real(r_double)    :: obs(8,maxlvl),qms(8,maxlvl),oes(8,maxlvl),pco(8,maxlvl)
