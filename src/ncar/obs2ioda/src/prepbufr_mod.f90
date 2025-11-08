@@ -511,7 +511,7 @@ subroutine read_prepbufr(filename, filedate)
 !       if ( T29 >= 500 .and. drift ) then
         if ( T29 < 500 .and. obs(1,1) < 300.0 ) then
 !         write(*,*) "DEBUG: T29:", T29, " RPTYPE (kx):", kx, " Lat:", hdr(3), " Lon:", hdr(2), " NLevels:", nlevels, " drift: ", drift
-          write(*,'(a, a5, 1x, 2(a,i6,1x), 7(a,f9.2,1x), a, l1)') &
+          write(*,'(a,a5,1x, 2(a,i6,1x), 3(a,f9.2,1x), a,g11.4,1x, 3(a,f9.2,1x), a,l1)') &
              "DEBUG: StationID: ", csid(1:5), "T29:", T29, "RPTYPE (kx):", kx, "Lat:", hdr(3), "Lon:", hdr(2), &
              "p:", obs(1,1), "q:", obs(2,1), "t:", obs(3,1), "u:", obs(5,1), "v:", obs(6,1), "drift:", drift
         end if
