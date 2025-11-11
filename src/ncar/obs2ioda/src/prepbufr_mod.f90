@@ -612,11 +612,11 @@ subroutine read_prepbufr(filename, filedate)
             ! sensible temperature
             if ( obs(3,k) < r8bfms ) then
                plink % each % t % val = obs(3,k)
-               if ( ( plink%lat >= target_lat_min ) .AND. ( plink%lat <= target_lat_max ) .AND. &
-                 ( plink%lon >= target_lon_min ) .AND. ( plink%lon <= target_lon_max ) ) then
+               if ( ( hdr(3) >= target_lat_min ) .AND. ( hdr(3) <= target_lat_max ) .AND. &
+                 ( hdr(2) >= target_lon_min ) .AND. ( hdr(2) <= target_lon_max ) ) then
                  if ( T29 < 500 .and. obs(1,k) < 300.0 ) then
                    write(*,'(a,a5,1x, 2(a,i6,1x), 3(a,f9.2,1x), a,g11.4,1x, 3(a,f9.2,1x))') &
-                     "PLINK: StationID: ", csid(1:5), "T29:", T29, "RPTYPE (kx):", kx, "Lat:", plink%lat, "Lon:", plink%lon, &
+                     "PLINK: StationID: ", csid(1:5), "T29:", T29, "RPTYPE (kx):", kx, "Lat:", hdr(3), "Lon:", hdr(2), &
                      "p:", obs(1,1), "q:", obs(2,k), "t:", obs(3,k), "u:", obs(5,k), "v:", obs(6,k)
                  end if
                end if
