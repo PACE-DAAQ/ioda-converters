@@ -916,6 +916,15 @@ subroutine sort_obs_conv(filedate, nfgat)
             end if
             xdata(ityp,itim)%xfield(iloc(ityp,itim),i)%rptype = plink%rptype
          end do
+         if ( ( plink%lat >= target_lat_min ) .AND. ( plink%lat <= target_lat_max ) .AND. &
+              ( plink%lon >= target_lon_min ) .AND. ( plink%lon <= target_lon_max ) ) then
+            if ( T29 < 500 ) then
+!           if ( T29 < 500 .and. obs(1,1) < 300.0 ) then
+               write(*,'(a,a5,1x, 2(a,i6,1x), 3(a,f9.2,1x), a,g11.4,1x, 3(a,f9.2,1x))') &
+                  "DEBUG: StationID: ", csid(1:5), "T29:", plink%t29, "RPTYPE (kx):", plink%rptype, "Lat:", plink%lat, "Lon:", plink%lon, &
+                  "p:", plink%each%p%val, "q:", plink%each%q%val, "t:", plink%each%t%val, "u:", plink%each%u%val, "v:", plink%each%v%val
+            end if
+         end if
          plink % each => plink % each % next
       end do levels
       plink => plink%next
