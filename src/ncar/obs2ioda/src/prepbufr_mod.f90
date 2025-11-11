@@ -596,14 +596,6 @@ subroutine read_prepbufr(filename, filedate)
             if ( pco(3,k) < r8bfms ) tpc = nint(pco(3,k))
          end if
 
-! debug  ! Check for the High-Resolution Temperature/Mass report type (119) RPTYPE_OF_LEVEL
-! debug  if ( kx .eq. 131 ) then
-! debug     ! Map Temperature
-! debug     if ( obs(3,k) < r8bfms ) then
-! debug        plink % each % t % val = obs(3,k)
-! debug     end if
-! debug  end if
-
          ! scale q and compute t from tv, if they aren't missing
          if (obs(2,k) > 0.0 .and. obs(2,k) < r8bfms) then
             obs(2,k) = obs(2,k)*1e-6  ! mg/kg to kg/kg
@@ -620,6 +612,11 @@ subroutine read_prepbufr(filename, filedate)
             ! sensible temperature
             if ( obs(3,k) < r8bfms ) then
                plink % each % t % val = obs(3,k)
+               if ( T29 < 500 .and. obs(1,k) < 300.0 ) then
+                 write(*,'(a,a5,1x, 2(a,i6,1x), 3(a,f9.2,1x), a,g11.4,1x, 3(a,f9.2,1x))') &
+                   "DEBUG: StationID: ", csid(1:5), "T29:", T29, "RPTYPE (kx):", kx, "Lat:", drf(2,k), "Lon:", drf(1,k), &
+                   "p:", obs(1,1), "q:", obs(2,k), "t:", obs(3,k), "u:", obs(5,k), "v:", obs(6,k)
+               end if
                if ( qms(3,k) < r8bfms ) then
                   plink % each % t % qm  = nint(qms(3,k))
                end if
