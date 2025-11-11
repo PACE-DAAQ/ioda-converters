@@ -716,6 +716,11 @@ subroutine sort_obs_conv(filedate, nfgat)
    character(len=14) :: cdate_min, cdate_max
    real(r_double) :: time_slots(0:nfgat)
 
+   real(r_kind) :: target_lat_min = 39.27_r_kind
+   real(r_kind) :: target_lat_max = 40.27_r_kind
+   real(r_kind) :: target_lon_min = 254.62_r_kind
+   real(r_kind) :: target_lon_max = 255.62_r_kind
+
    write(*,*) '--- sorting conv obs...'
 
    call da_advance_time(filedate, dtime_min, cdate_min)
