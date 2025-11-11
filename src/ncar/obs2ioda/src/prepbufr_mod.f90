@@ -612,10 +612,13 @@ subroutine read_prepbufr(filename, filedate)
             ! sensible temperature
             if ( obs(3,k) < r8bfms ) then
                plink % each % t % val = obs(3,k)
-               if ( T29 < 500 .and. obs(1,k) < 300.0 ) then
-                 write(*,'(a,a5,1x, 2(a,i6,1x), 3(a,f9.2,1x), a,g11.4,1x, 3(a,f9.2,1x))') &
-                   "DEBUG: StationID: ", csid(1:5), "T29:", T29, "RPTYPE (kx):", kx, "Lat:", drf(2,k), "Lon:", drf(1,k), &
-                   "p:", obs(1,1), "q:", obs(2,k), "t:", obs(3,k), "u:", obs(5,k), "v:", obs(6,k)
+               if ( ( plink%each%lat >= target_lat_min ) .AND. ( plink%each%lat <= target_lat_max ) .AND. &
+                 ( plink%each%lon >= target_lon_min ) .AND. ( plink%each%lon <= target_lon_max ) ) then
+                 if ( T29 < 500 .and. obs(1,k) < 300.0 ) then
+                   write(*,'(a,a5,1x, 2(a,i6,1x), 3(a,f9.2,1x), a,g11.4,1x, 3(a,f9.2,1x))') &
+                     "PLINK: StationID: ", csid(1:5), "T29:", T29, "RPTYPE (kx):", kx, "Lat:", plink%each%lat, "Lon:", plink%each%lon, &
+                     "p:", obs(1,1), "q:", obs(2,k), "t:", obs(3,k), "u:", obs(5,k), "v:", obs(6,k)
+                 end if
                end if
                if ( qms(3,k) < r8bfms ) then
                   plink % each % t % qm  = nint(qms(3,k))
