@@ -438,7 +438,7 @@ subroutine read_prepbufr(filename, filedate)
       ! station 78383 (kx=184/t29=511) has station elevation=9999.0 and valid height quality markers
       ! a few other stations have station elevation=9999.0 and height quality markers = 15
       ! to do: this check could be done in filter_obs_conv by implementing blacklist
-      if ( abs(hdr(6) - 9999.0) < 0.01 .and. t29 /= 41 ) cycle reports ! aircraft could have elv=9999.0
+!     if ( abs(hdr(6) - 9999.0) < 0.01 .and. t29 /= 41 ) cycle reports ! aircraft could have elv=9999.0
 
       ! the following (as in GSI read_prepbufr.f90) could reject reports at the poles
       if ( abs(hdr(2)) > 360.0 .or. abs(hdr(3)) > 90.0 ) cycle reports
